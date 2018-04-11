@@ -1,7 +1,0 @@
-#!/bin/bash
-npm install -g loopback-cli
-lb
-npm install --save loopback-connector-mongodb
-lb datasource mongoDS --connector mongoDB
-lb model
-lb relation

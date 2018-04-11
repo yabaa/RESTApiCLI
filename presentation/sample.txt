@@ -1,0 +1,58 @@
+1 - Run mongoDB
+cd ~/mongodb/bin && ./mongod
+
+After creating application, change port from 3000 to 3001.
+localhost:3001/explorer to access swagger
+
+Model : team (id, name, city, stadium) / player (id, name, age)
+POST teams:
+{
+  "name": "Real Madrid",
+  "city": "Madrid",
+  "stadium": "Santiago Bernabeu"
+},
+{
+  "name": "Juventus de Turin",
+  "city": "Turin",
+  "stadium": "Allianz Stadium"
+},
+{
+  "name": "Chelsea",
+  "city": "London",
+  "stadium": "Stamford Bridge"
+}
+POST players:
+
+{
+  "name": "Lionel Messi",
+  "age": 30,
+  "teamId": "???"
+},
+{
+  "name": "Paulo Bruno Exequiel Dybala",
+  "age": 24,
+  "teamId": "???"
+},
+{
+  "name": "Eden Hazard",
+  "city": 27,
+  "teamId": "???"
+}
+
+2 - ACL : lb acl
+After command, check if config is right ! Param : $unauthenticated
+POST USERS :
+{
+  "realm": "test",
+  "username": "user",
+  "email": "user@test.com",
+  "password": "password"
+  "emailVerified": true
+}
+
+
+LOGIN and get access token:
+{
+  "email": "user@test.com",
+  "password": "password"
+}

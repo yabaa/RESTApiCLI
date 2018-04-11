@@ -8,7 +8,7 @@
        if (error) {
          return "error : " + error.message;
        } else if (!isLoaded) {
-         return 'Waiting for an action...';
+         return 'Waiting...';
        } else {
          return(
              <textarea

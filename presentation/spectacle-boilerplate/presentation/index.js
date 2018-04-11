@@ -5,15 +5,10 @@ import { Spectacle, Deck } from 'spectacle';
 import CodeSlide from 'spectacle-code-slide';
 import preloader from "spectacle/lib/utils/preloader";
 import './style.css';
-import soccerImage from "../assets/city.jpg"
-import createApp from "../assets/createApp.png"
-import nextStep from "../assets/nextStep.png"
-import mongoDBConnector from "../assets/mongoDBConnector.png"
-import teamModel from "../assets/teamModel.png"
-import relationModels from "../assets/relationModels.png"
 
 // Import Spectacle Core tags
 import {
+  Appear,
   BlockQuote,
   ComponentPlayground,
   Cite,
@@ -33,6 +28,12 @@ import createTheme from "spectacle/lib/themes/default";
 // Require CSS
 require("normalize.css");
 
+const images = {
+  homerPlay: require('../assets/homer_play.png'),
+  homerSit: require('../assets/homer_sit.jpg'),
+  soccerBackground: require('../assets/bg_soccer.jpg')
+};
+
 const theme = createTheme({
   primary: "#f5c80d",
   secondary: "#1F2022",
@@ -44,6 +45,7 @@ const theme = createTheme({
 });
 
 export default class Presentation extends React.Component {
+
   render() {
     return (
       <Deck transition={["zoom", "slide"]} transitionDuration={500} theme={theme}>
@@ -53,20 +55,23 @@ export default class Presentation extends React.Component {
             all from command line
           </Text>
         </Slide>
-        <Slide transition={["spin"]} bgColor="primary" textColor="tertiary">
-          <Heading size={3} textColor="secondary" caps>The project</Heading>
-          <Text margin="10px 0 0" textColor="tertiary" size={1} fit>
+        <Slide transition={["spin"]} bgImage={images.soccerBackground} bgDarken={0.7} textColor="tertiary">
+        <Appear>
+          <Heading size={3} textColor="primary" caps>The project</Heading>
+          </Appear>
+          <Appear>
+          <Text margin="10px 0 0" textColor="primary" size={3}>
             RESTful API which manage professional soccer players and teams with <br/>a back-end on Node.js <br />and a MongoDB
           </Text>
+          </Appear>
         </Slide>
         <Slide transition={["fade"]} bgColor="primary" textColor="tertiary">
           <Heading size={3} textColor="secondary" caps>How will we do it?</Heading>
           <List>
             <ListItem>Using LoopBack</ListItem>
-            <ListItem>Creating application via CLI</ListItem>
-            <ListItem>Creating data models via CLI</ListItem>
+            <ListItem>Creating application</ListItem>
+            <ListItem>Creating data models</ListItem>
           </List>
-          <GoToAction slide={1}>Jump to 3</GoToAction>
         </Slide>
         <Slide transition={["fade"]} bgColor="primary" textColor="tertiary">
           <Heading size={3} textColor="secondary" caps>Pre-requisite</Heading>
@@ -75,52 +80,109 @@ export default class Presentation extends React.Component {
             <ListItem>MongoDB server running</ListItem>
           </List>
         </Slide>
-          <CodeSlide
-            transition={[]}
-            lang="js"
-            code={require("raw-loader!../../../code/script.example")}
-            ranges={[
-              { loc: [1, 7], title: "Walking through some commands" },
-              { loc: [1, 2], title: "Install LoopBack" },
-              { loc: [2, 3], title: "Creating Application!" , note: "Make sure you are in the right directory!"},
-              { loc: [2, 3], image: createApp },
-              { loc: [3, 4], title: "Installing MongoDB Connector"},
-              { loc: [4, 5], title: "Connecting MongoDB Connector"},
-              { loc: [4, 5], image: mongoDBConnector},
-              { loc: [5, 6], title: "Creating model", note: "We create two models : Team and Player!"},
-              { loc: [5, 6], image: teamModel},
-              { loc: [6, 7], title: "Creating relation", note: "One team has many players!"},
-              { loc: [6, 7], image: relationModels}
-            ]}/>
-            <CodeSlide
-              transition={[]}
-              lang="js"
-              code={require("raw-loader!../../../code/soccer-team/common/models/team.json")}
-              ranges={[
-                { loc: [1, 270], title: "Walking through generated model" },
-                { loc: [1, 2], note: "Model Name" },
-                { loc: [2, 7], note: "Persistennce Information" },
-                { loc: [7, 21], note: "Team Properties" },
-                { loc: [22, 32], note: "Relation between a team and players " }
-              ]}/>
-        <Slide transition={["fade"]} bgColor="primary" textColor="tertiary">
-          <Heading size={6} textColor="secondary" caps>Standard List</Heading>
-          <List>
-            <ListItem>Item 1</ListItem>
-            <ListItem>Item 2</ListItem>
-            <ListItem>Item 3</ListItem>
-            <ListItem>Item 4</ListItem>
+        <Slide transition={['spin']} >
+          <Heading size={3} fit textColor="secondary">
+            Install LoopBack
+          </Heading>
+            npm install -g loopback-cli
+        </Slide>
+        <Slide transition={['spin']}>
+          <Heading size={3} fit textColor="secondary">
+            Creating Application
+          </Heading>
+          <Appear>
+            <Heading size={6} textColor="tertiary">command : lb</Heading>
+          </Appear>
+          <Appear>
+            <List>
+              <ListItem>Application name</ListItem>
+              <ListItem>LoopBack version</ListItem>
+              <ListItem>Application type</ListItem>
+            </List>
+          </Appear>
+        </Slide>
+        <Slide transition={['spin']}>
+          <Heading size={3} fit textColor="secondary">
+            Installing MongoDB Connector
+          </Heading>
+          <Appear>
+            <Heading textColor="tertiary" fit>command : npm install --save loopback-connector-mongodb</Heading>
+          </Appear>
+
+        </Slide>
+        <Slide transition={['spin']}>
+          <Heading size={3} fit textColor="secondary">
+            Connecting MongoDB Connector
+          </Heading>
+          <Appear>
+            <Heading textColor="tertiary" fit>command : lb datasource mongoDS --connector mongoDB</Heading>
+          </Appear>
+          <Appear>
+            <List>
+              <ListItem>Datasource Name</ListItem>
+              <ListItem>Connector type</ListItem>
+              <ListItem>Other settings : host, port, database</ListItem>
+            </List>
+          </Appear>
+        </Slide>
+        <Slide transition={['spin']}>
+          <Heading size={3} fit textColor="secondary">
+            Creating model
+          </Heading>
+          <Appear>
+            <Heading textColor="tertiary" size={6}>command : lb model</Heading>
+          </Appear>
+          <Appear>
+            <List>
+              <ListItem>Model Name</ListItem>
+              <ListItem>Datasource</ListItem>
+              <ListItem>Persistence type</ListItem>
+              <ListItem>Model : Server or Common?</ListItem>
+            </List>
+          </Appear>
+        </Slide>
+        <Slide transition={['spin']}>
+          <Heading size={3} fit textColor="secondary">
+            Creating relation
+          </Heading>
+          <Appear>
+            <Heading textColor="tertiary" size={6} >command : lb relation</Heading>
+          </Appear>
+        </Slide>
+        <Slide transition={["fade"]} bgImage={images.homerPlay} bgDarken={0.8} textColor="primary">
+          <Heading size={1} textColor="primary" caps fit>Demo</Heading>
+          {/*<ApiDemo/>*/}
+        </Slide>
+        <Slide transition={["fade"]} bgColor="primary">
+          <Heading size={3} textColor="secondary" caps>What about authentication?</Heading>
+          <Appear>
+            <Heading textColor="tertiary" size={6} >command : lb acl</Heading>
+          </Appear>
+          <Appear>
+            <List>
+              <ListItem>Model(s) to apply</ListItem>
+              <ListItem>Authentication scope</ListItem>
+              <ListItem>Access Type</ListItem>
+              <ListItem>Role</ListItem>
+              <ListItem>Permission</ListItem>
+            </List>
+          </Appear>
+        </Slide>
+        <Slide transition={["spin"]} bgColor="secondary" textColor="primary">
+          <Heading size={3} textColor="primary">Summary</Heading>
+          <List textColor="primary">
+            <ListItem>lb : Create the application</ListItem>
+            <ListItem>lb model : Create database models</ListItem>
+            <ListItem>lb relation : Create models relations</ListItem>
+            <ListItem>lb acl : Set up authentication</ListItem>
           </List>
         </Slide>
-        <Slide transition={["fade"]} bgColor="primary" textColor="tertiary">
-          <Heading size={6} textColor="secondary" caps>Demo</Heading>
-          <ApiDemo/>
-        </Slide>
-        <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-          <BlockQuote>
-            <Quote>Example Quote</Quote>
-            <Cite>Author</Cite>
-          </BlockQuote>
+        <Slide transition={["spin"]} bgImage={images.homerSit} bgSize="contain" bgPosition="top" bgDarken={0.7} >
+          <Heading size={3} textColor="primary">Links</Heading>
+          <List textColor="primary" fit>
+            <ListItem>loopback.io </ListItem>
+            <ListItem>github.com/yahyabaassou/rest-api-cli</ListItem>
+          </List>
         </Slide>
       </Deck>
     );

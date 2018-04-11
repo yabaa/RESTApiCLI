@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
 const requestSample = {
-  endpoint: 'https://httpbin.org/get',
-  method: 'GET',
+  endpoint: '/api/teams',
+  method: 'POST',
   data: {
     "value": "string"
   }
@@ -30,7 +30,6 @@ class Input extends Component {
       evt.preventDefault();
       var start = textarea.selectionStart;
       var end = textarea.selectionEnd;
-
       // set textarea value to: text before caret + tab + text after caret
       const spaces = '  ';
       textarea.value =

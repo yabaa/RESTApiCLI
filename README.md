@@ -15,6 +15,7 @@ What's [Loopback](https://loopback.io/doc/index.html) ?
 Make a directory where you wish to store your project. Open the folder you have created and run the following commands :
 
 * Create application
+Make sure you are in the right folder and type :
 > lb
 * Run application
 > node .
@@ -36,4 +37,6 @@ Note that if you need to have relations between each models, you can use :
 > lb relation
 
 ### Step 5: Authentication
-Coming soon...
+> lb acl
+
+You need to create a user and call login api which return you an access_token.
