@@ -14,12 +14,20 @@ import {
   Cite,
   Code,
   Heading,
+  Layout,
+  Fill,
   ListItem,
   List,
   Quote,
   Slide,
   Image,
   Text,
+  Table,
+  TableBody,
+  TableRow,
+  TableItem,
+  TableHeader,
+  TableHeaderItem,
   GoToAction
 } from "spectacle";
 
@@ -89,7 +97,7 @@ export default class Presentation extends React.Component {
         <Slide transition={["fade"]} bgColor="primary" textColor="tertiary">
           <Heading size={3} textColor="secondary" caps>Pre-requisite</Heading>
           <List>
-            <ListItem>Node.js</ListItem>
+            <ListItem>Node.js installed</ListItem>
             <ListItem>MongoDB server running</ListItem>
           </List>
         </Slide>
@@ -97,15 +105,13 @@ export default class Presentation extends React.Component {
           <Heading size={3} fit textColor="secondary">
             Install LoopBack
           </Heading>
-            npm i -g @loopback/cli
+            <Code>npm i -g @loopback/cli</Code>
         </Slide>
         <Slide transition={['spin']}>
           <Heading size={3} fit textColor="secondary">
             Creating Application
           </Heading>
-          <Appear>
-            <Code>lb4 app</Code>
-          </Appear>
+          <Code>lb4 app</Code>
           <Appear>
             <List>
               <ListItem>Project name</ListItem>
@@ -120,17 +126,13 @@ export default class Presentation extends React.Component {
           <Heading size={3} fit textColor="secondary">
             Installing MongoDB Connector
           </Heading>
-          <Appear>
-            <Code>npm install --save loopback-connector-mongodb</Code>
-          </Appear>
+          <Code>npm install --save loopback-connector-mongodb</Code>
         </Slide>
         <Slide transition={['spin']}>
           <Heading size={3} fit textColor="secondary">
             Connecting MongoDB Connector
           </Heading>
-          <Appear>
-            <Code>lb4 datasource mongoDS --connector mongoDB</Code>
-          </Appear>
+          <Code>lb4 datasource mongoDS --connector mongoDB</Code>
           <Appear>
             <List>
               <ListItem>Datasource Name</ListItem>
@@ -143,25 +145,43 @@ export default class Presentation extends React.Component {
           <Heading size={3} fit textColor="secondary">
             Creating model
           </Heading>
-          <Appear>
-            <Code>lb4 model</Code>
-          </Appear>
-          <Appear>
-            <List>
-              <ListItem>Model Name</ListItem>
-              <ListItem>Datasource</ListItem>
-              <ListItem>Persistence type</ListItem>
-              <ListItem>Model : Server or Common?</ListItem>
-            </List>
-          </Appear>
+          <Code>lb4 model</Code>
+          <Layout>
+            <Fill>
+              <Text>Input</Text>
+              <Appear>
+                <List>
+                  <ListItem textSize="20">Model Name</ListItem>
+                  <ListItem textSize="20">Model base class</ListItem>
+                  <ListItem textSize="20">Additional properties (default false)</ListItem>
+                  <ListItem textSize="20">While property name is not blank:
+                    <List margin="10">
+                      <ListItem textSize="20">Property name</ListItem>
+                      <ListItem textSize="20">Property type</ListItem>
+                      <ListItem textSize="20">Is ID field (default false)</ListItem>
+                      <ListItem textSize="20">Required (default false)</ListItem>
+                      <ListItem textSize="20">Default value</ListItem>
+                    </List>
+                  </ListItem>
+                </List>
+              </Appear>
+            </Fill>
+            <Fill>
+            <Text>Output</Text>
+              <Appear>
+                <List>
+                  <ListItem textSize="20" bulletStyle="arrow">Create a Model class as follows: /src/models/&lt;modelName&gt;.model.ts</ListItem>
+                  <ListItem textSize="20">Update /src/models/index.ts to export the newly created Model class</ListItem>
+                </List>
+              </Appear>
+            </Fill>
+          </Layout>
         </Slide>
         <Slide transition={['spin']}>
           <Heading size={3} fit textColor="secondary">
             Creating repositories
           </Heading>
-          <Appear>
-            <Code>lb4 repository</Code>
-          </Appear>
+          <Code>lb4 repository</Code>
           <Appear>
             <List>
               <ListItem>Datasource</ListItem>
@@ -173,9 +193,7 @@ export default class Presentation extends React.Component {
           <Heading size={3} fit textColor="secondary">
             Creating controllers
           </Heading>
-          <Appear>
-            <Code>lb4 controller</Code>
-          </Appear>
+          <Code>lb4 controller</Code>
           <Appear>
             <List>
               <ListItem>Controller class name</ListItem>
@@ -191,28 +209,53 @@ export default class Presentation extends React.Component {
           <Heading size={3} fit textColor="secondary">
             Generated folder hierarchy
           </Heading>
-          <Appear>
-            <List>
-              <ListItem>Datasources: ./src/datasources</ListItem>
-              <ListItem>Controllers: ./src/controllers</ListItem>
-              <ListItem>Models: ./src/models</ListItem>
-              <ListItem>Repositories: ./src/repositories</ListItem>
-            </List>
-          </Appear>
+          <Layout>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHeaderItem><Text bold>Artifacts</Text></TableHeaderItem>
+                  <TableHeaderItem />
+                  <TableHeaderItem><Text bold>Location</Text></TableHeaderItem>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableItem>Datasources</TableItem>
+                  <TableItem>-</TableItem>
+                  <TableItem>./src/datasources</TableItem>
+                </TableRow>
+                <TableRow>
+                  <TableItem>Controllers</TableItem>
+                  <TableItem>-</TableItem>
+                  <TableItem>./src/controllers</TableItem>
+                </TableRow>
+                <TableRow>
+                  <TableItem>Models</TableItem>
+                  <TableItem>-</TableItem>
+                  <TableItem>./src/models</TableItem>
+                </TableRow>
+                <TableRow>
+                  <TableItem>Repositories</TableItem>
+                  <TableItem>-</TableItem>
+                  <TableItem>./src/repositories</TableItem>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </Layout>
         </Slide>
-        <Slide transition={['spin']}>
+        {/*<Slide transition={['spin']}>
           <Heading size={3} fit textColor="secondary">
             Creating relation
           </Heading>
           <Appear>
             <Code>lb relation</Code>
           </Appear>
-        </Slide>
+        </Slide>*/}
         <Slide transition={["fade"]} bgImage={images.homerPlay} bgDarken={0.8} textColor="primary">
           <Heading size={1} textColor="primary" caps fit>Demo</Heading>
           {/*<ApiDemo/>*/}
         </Slide>
-        <Slide transition={["fade"]} bgColor="primary">
+        {/*<Slide transition={["fade"]} bgColor="primary">
           <Heading size={3} textColor="secondary" caps>What about authentication?</Heading>
           <Appear>
             <Code>lb acl</Code>
@@ -226,20 +269,21 @@ export default class Presentation extends React.Component {
               <ListItem>Permission</ListItem>
             </List>
           </Appear>
-        </Slide>
+        </Slide>*/}
         <Slide transition={["spin"]} bgColor="secondary" textColor="primary">
           <Heading size={3} textColor="primary">Summary</Heading>
-          <List textColor="primary">
-            <ListItem>lb : Create the application</ListItem>
-            <ListItem>lb model : Create database models</ListItem>
-            <ListItem>lb relation : Create models relations</ListItem>
-            <ListItem>lb acl : Set up authentication</ListItem>
+          <List textColor="primary" textAlign="center">
+            <ListItem textSize="30">lb4 app : Create the application</ListItem>
+            <ListItem textSize="30">lb4 model : Create database models</ListItem>
+            <ListItem textSize="30">lb4 controller : Create controllers</ListItem>
+            <ListItem textSize="30">lb4 repository : Create respoitories</ListItem>
+            <ListItem textSize="30">lb4 datasource : Link application to the datasource</ListItem>
           </List>
         </Slide>
         <Slide transition={["spin"]} bgImage={images.homerSit} bgSize="contain" bgPosition="top" bgDarken={0.7} >
-          <Heading size={3} textColor="primary">Links</Heading>
+          <Heading size={3} textColor="primary">Thanks !</Heading>
           <List textColor="primary" fit>
-            <ListItem>loopback.io </ListItem>
+            <ListItem>loopback.io</ListItem>
             <ListItem>github.com/yahyabaassou/rest-api-cli</ListItem>
           </List>
         </Slide>

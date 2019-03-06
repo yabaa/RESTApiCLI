@@ -17,7 +17,7 @@ Make a directory where you wish to store your project. Open the folder you have 
 
 * Create application
 Make sure you are in the right folder and type :
-> lb app
+> lb4 app
 * Run application
 > node .
 
@@ -46,6 +46,6 @@ Run following command to create data controllers:
 > lb4 controller
 
 ### Step 7: Authentication
-> lb acl
-
 You need to create a user and call login api which return you an access_token.
+
+> lb acl>>>not working
